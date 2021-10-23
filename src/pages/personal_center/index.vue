@@ -1,20 +1,13 @@
 <template>
-  <view class="index">
-    <view>
-      <img src="" alt="">
-    </view>
-    {{ msg }}
-    <view class="btn">
-      <nut-button type="primary" @click="handleClick('text', msg2, true)">点我</nut-button>
-    </view>
-    <nut-toast :msg="msg" v-model:visible="show" :type="type" :cover="cover" />
+  <view class="personal_center">
+    <nut-cell title="路由跳转 ’/‘ " to="/"></nut-cell>
   </view>
 </template>
 
 <script lang="ts">
 import { reactive, toRefs } from 'vue';
 export default {
-  name: 'Index',
+  name: 'PersonalCenter',
   components: {
     
   },
@@ -43,10 +36,7 @@ export default {
 </script>
 
 <style lang="scss">
-.index {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+.personal_center {
+  
 }
 </style>

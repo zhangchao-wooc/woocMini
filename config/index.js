@@ -1,3 +1,4 @@
+const path = require('path');
 const config = {
   projectName: 'woocMini',
   date: '2021-8-6',
@@ -7,6 +8,15 @@ const config = {
     750: 1,
     828: 1.81 / 2,
     375: 2 / 1
+  },
+  alias: {
+    '@/components': path.resolve(__dirname, '..', 'src/components'),
+    '@/until': path.resolve(__dirname, '..', 'src/until'),
+  },
+  sass: {
+    resource: [
+        path.resolve(__dirname, '..', 'src/assets/styles/themes.scss')
+    ]
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
