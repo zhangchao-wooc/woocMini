@@ -35,12 +35,13 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.7.7",
-    "@tarojs/runtime": "3.3.2",
-    "@tarojs/taro": "3.3.2",
+    "@nutui/nutui-taro": "^3.0.3",
     "@tarojs/components": "3.3.2",
     "@tarojs/plugin-html": "3.3.2",
-    "vue": "^3.0.0",
-    "@nutui/nutui-taro": "^3.0.3"
+    "@tarojs/runtime": "3.3.2",
+    "@tarojs/taro": "3.3.2",
+    "@wooc/brokenwheel": "0.0.2",
+    "vue": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
