@@ -1,0 +1,11 @@
+{
+  "back_to_home": "Back to the home page",
+  "error404": "This page could not be found...",
+  "error500": "Error!",
+  "refresh": "Refresh",
+  "title": "title",
+  "page.localeProvider": "{ name }, a JavaScript library for building user interfaces.",
+  "home": "Home",
+  "my": "My",
+  "shop": "shop"
+}

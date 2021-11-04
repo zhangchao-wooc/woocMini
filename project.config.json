@@ -1,8 +1,9 @@
 {
     "miniprogramRoot": "dist/",
+    "cloudfunctionRoot": "cloud/",
     "projectname": "woocMini",
     "description": "woocMini",
-    "appid": "wx85fb47c926ab1532",
+    "appid": "wx7656c8a0481e6077",
     "setting": {
         "urlCheck": true,
         "es6": false,
@@ -37,9 +38,11 @@
         "packNpmRelationList": [],
         "minifyWXSS": true,
         "disableUseStrict": false,
+        "minifyWXML": true,
         "showES6CompileOption": false,
         "useCompilerPlugins": false
     },
     "compileType": "miniprogram",
+    "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
     "condition": {}
 }

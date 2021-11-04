@@ -5,16 +5,13 @@
       <view class="nickname">{{t('back_to_home')}}</view>
       <nut-icon class="icon" name="right"></nut-icon>
     </view>
-    <button @click="set">切换</button>
-    <button @click="to">{{msg2}}</button>
-
-    
-
+    <button @click="set">切换</button>   
+    <button @click="to">返回</button> 
   </view>
 </template>
 
 <script lang="ts">
-import { onMounted, reactive, toRefs } from 'vue';
+import { onBeforeMount, onMounted, reactive, toRefs } from 'vue';
 import Taro from '@tarojs/taro'
 // import button from '../../components/button';
 export default {
@@ -37,15 +34,19 @@ export default {
       state.type = type;
       state.cover = cover;
     };
+    onBeforeMount(() => {
+      wx.hideHomeButton()
+    })
 
     onMounted(() => {
-      wx.setNavigationBarTitle({title: wx.$t('my')})
+      wx.setNavigationBarTitle({title: wx.$t('shop')})
     });
 
     return {
       ...toRefs(state),
       handleClick,
-      onMounted
+      onMounted,
+      onBeforeMount
     }
   },
   created() {
@@ -55,18 +56,19 @@ export default {
   methods: {
     set() {
       const a = wx.$i18n.getLocales()
-      wx.$i18n.setLocales( a === 'en-US' ? 'zh-CN':  'en-US')
-      console.log(wx.$i18n);
+      console.log('set', a);
+      console.log(wx);
       
+      wx.$i18n.setLocales( a === 'zh-CN' ? 'en-US' : 'zh-CN')
+      // this.msg2 = wx.$i18n.getLocales()
     },
     t(id) {
       return wx.$t(id)
     },
     to() {
       console.log('to');
-      
-      Taro.reLaunch({
-        url: '/pages/shop/index?params=10'
+      Taro.switchTab({
+        url: '/pages/personal_center/index'
       })
     }
   }

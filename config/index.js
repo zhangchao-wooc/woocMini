@@ -12,6 +12,7 @@ const config = {
   alias: {
     '@/components': path.resolve(__dirname, '..', 'src/components'),
     '@/until': path.resolve(__dirname, '..', 'src/until'),
+    '@/api': path.resolve(__dirname, '..', 'src/api')
   },
   sass: {
     resource: [

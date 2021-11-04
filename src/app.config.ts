@@ -1,7 +1,11 @@
 export default {
   pages: [
+    // 'pages/personal_center/index',
     'pages/home/index',
-    'pages/personal_center/index'
+    'pages/personal_center/index',
+    'pages/shop/index',
+
+    
   ],
   window: {
     backgroundTextStyle: 'light',

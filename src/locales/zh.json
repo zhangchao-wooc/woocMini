@@ -1,0 +1,11 @@
+{
+  "back_to_home": "回到首页",
+  "error404": "找不到这个页面...",
+  "error500": "出错啦...",
+  "refresh": "刷新",
+  "title": "标题",
+  "page.localeProvider": "{ name }, 是一个用于构建用户界面的 JAVASCRIPT 库。",
+  "home": "首页",
+  "my": "我的",
+  "shop": "购物"
+}

@@ -24,7 +24,8 @@
     "dev:h5": "npm run build:h5 -- --watch",
     "dev:rn": "npm run build:rn -- --watch",
     "dev:qq": "npm run build:qq -- --watch",
-    "dev:quickapp": "npm run build:quickapp -- --watch"
+    "dev:quickapp": "npm run build:quickapp -- --watch",
+    "serve": "node ./src/mock/server.ts"
   },
   "browserslist": [
     "last 3 versions",
@@ -41,6 +42,7 @@
     "@tarojs/runtime": "3.3.2",
     "@tarojs/taro": "3.3.2",
     "@wooc/brokenwheel": "0.0.2",
+    "koa": "^2.13.4",
     "vue": "^3.0.0"
   },
   "devDependencies": {

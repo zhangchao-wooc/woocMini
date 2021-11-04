@@ -13,9 +13,10 @@
     </swiper>
     
     <nut-infiniteloading
-      containerId = 'scroll'
-      :use-window='false'
+      :use-window='true'
+      :threshold="200"
       :has-more="hasMore"
+      :is-open-refresh="true"
       @load-more="loadMore"
     >
       <view class="commodity">
@@ -60,19 +61,19 @@ export default {
       ],
       dataList: [
         {
-          name: '123',
+          name: wx.$t('error500'),
           img: 'https://storage.360buyimg.com/jdc-article/NutUItaro34.jpg',
           price: '234',
           tag: []
         },
         {
-          name: '史蒂夫',
+          name: wx.$t('refresh'),
           img: 'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
           price: '567',
           tag: []
         },
         {
-          name: '刚回家',
+          name: wx.$t('title'),
           img: 'https://storage.360buyimg.com/jdc-article/welcomenutui.jpg',
           price: '234',
           tag: []
@@ -97,7 +98,7 @@ export default {
       setTimeout(() => {
         const curLen = state.dataList.length;
         for (let i = curLen; i < curLen + 10; i++) {
-          state.dataList.push(`${i}`);
+          state.dataList.push(state.dataList[i]);
         }
         if (state.dataList.length > 30) hasMore.value = false;
         done()
@@ -110,7 +111,7 @@ export default {
     // }
 
     onMounted(() => {
-      // init()
+      wx.setNavigationBarTitle({title: wx.$t('home')})
     });
 
     return {
