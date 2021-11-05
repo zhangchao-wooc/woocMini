@@ -1,6 +1,4 @@
-
-const {env, getLang, region, _reload, _storage} = require('./until');
-
+const {_env, getLang, region, _reload, _storage} = require('./until');
 interface configType {
   locales: object;
   defualtLang?: string;
@@ -13,7 +11,7 @@ class I18n {
   lang: string;
   defualtLang: string;
   langTag: string;
-  constructor () {
+  constructor (config: configType) {
     this.allLangData = Object.create(null)
     this.lang = 'en-US'
     this.defualtLang = 'en-US'
@@ -21,7 +19,7 @@ class I18n {
   }
 
   init (config: configType) {
-    console.log('init');
+    console.log(process);
     
     this.allLangData = config.locales ||  Object.create(null)
     this.defualtLang = config.defualtLang || 'en-US'
@@ -37,13 +35,11 @@ class I18n {
   }
 
   getLocales () {
-    console.log('getLocales', _storage('get'));
-    
     return _storage('get') || this.lang
   }
 
   getEnv () {
-    return env()
+    return _env
   }
 
   getLanguagePackList () {
@@ -58,31 +54,24 @@ class I18n {
   }
 
   updateLocale (obj: object) { // 更新已有语言文件的数据
-    // @ts-ignore
-    if (!this.allLangData[this.langTag]) {
-      // 本地语言不存在,调用接口后添加
-    }
-  
-    for (var key in obj) {
-      // @ts-ignore
-      this.allLangData[this.langTag][key] = obj[key]
-    }
-    // location.reload()
-    wx.stopPullDownRefresh()
+    Object.keys(obj).forEach(item => {
+      Object.keys(obj[item]).forEach(key => {
+        this.allLangData[item][key] = obj[item][key]
+      })
+    })
+    _reload()
+    
   }
 
   // 小程序语言标记：zh_CN  浏览器语言标记：zh-CN 不一致。统一转化为zh-cn 小写 + '-', return region中对应的语言标记
   _formatLanguageTag (s: string) {
     try {
       const lang = s.includes('_') ? s.replace('_', '-').toLowerCase() : s.toLowerCase()
-      console.log('_formatLanguageTag', lang, region[lang]);
-      
       return region[lang]
     } catch {
       throw `Please check if the lang tag ${s} is correct`
     }
   }
-
   
 }
 

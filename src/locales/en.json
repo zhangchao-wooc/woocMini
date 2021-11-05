@@ -4,7 +4,7 @@
   "error500": "Error!",
   "refresh": "Refresh",
   "title": "title",
-  "page.localeProvider": "{ name }, a JavaScript library for building user interfaces.",
+  "page.localeProvider": "page is not tabbar",
   "home": "Home",
   "my": "My",
   "shop": "shop"

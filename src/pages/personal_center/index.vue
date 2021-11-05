@@ -5,10 +5,16 @@
       <view class="nickname">{{t('back_to_home')}}</view>
       <nut-icon class="icon" name="right"></nut-icon>
     </view>
-    <button @click="set">切换</button>
-    <button @click="to">{{msg2}}</button>
-
-    
+    <div class="show" style="display: grid; placeItems: center; margin: 50px 0">
+      <view class="nickname">{{t('back_to_home')}}</view>
+      <view class="nickname">{{t('refresh')}}</view>
+      <view class="nickname">{{t('home')}}</view>
+    </div>
+    <button @click="set">切换语言</button>
+    <button @click="to">跳转非tabBar</button>
+    <button @click="update">增量更新</button>
+    <button @click="prompt">prompt</button>
+    <nut-toast :msg="msg" v-model:visible="show" :type="type" />
 
   </view>
 </template>
@@ -16,6 +22,7 @@
 <script lang="ts">
 import { onMounted, reactive, toRefs } from 'vue';
 import Taro from '@tarojs/taro'
+// import { Toast } from '@nutui/nutui-taro';
 // import button from '../../components/button';
 export default {
   name: 'PersonalCenter',
@@ -38,6 +45,10 @@ export default {
       state.cover = cover;
     };
 
+    const prompt = () => {
+      state.show = true
+    }
+
     onMounted(() => {
       wx.setNavigationBarTitle({title: wx.$t('my')})
     });
@@ -45,7 +56,8 @@ export default {
     return {
       ...toRefs(state),
       handleClick,
-      onMounted
+      onMounted,
+      prompt
     }
   },
   created() {
@@ -54,9 +66,10 @@ export default {
   },
   methods: {
     set() {
+      console.log(wx.$i18n);
+
       const a = wx.$i18n.getLocales()
       wx.$i18n.setLocales( a === 'en-US' ? 'zh-CN':  'en-US')
-      console.log(wx.$i18n);
       
     },
     t(id) {
@@ -67,6 +80,23 @@ export default {
       
       Taro.reLaunch({
         url: '/pages/shop/index?params=10'
+      })
+    },
+    update() {
+      wx.cloud.init()
+      wx.cloud.callFunction({
+        name: 'lang',
+        data: {
+          moduleName: 'mini',
+          bizId: 234,
+          lang: '123',
+          version: '123',
+        }
+      }).then(res => {
+        const d = res.result.data[0].locales
+
+        wx.$i18n.updateLocale(d)
+
       })
     }
   }

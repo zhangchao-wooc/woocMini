@@ -4,7 +4,7 @@
   "error500": "出错啦...",
   "refresh": "刷新",
   "title": "标题",
-  "page.localeProvider": "{ name }, 是一个用于构建用户界面的 JAVASCRIPT 库。",
+  "page.localeProvider": "非tabbar页面",
   "home": "首页",
   "my": "我的",
   "shop": "购物"

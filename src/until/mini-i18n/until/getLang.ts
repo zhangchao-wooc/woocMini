@@ -1,13 +1,14 @@
 /*
  * get current language
  */
-const { env } = require('./env')
-const _env = env()
+const { _env } = require('./env')
 
 export const getLang = () => {
   switch (_env) {
     case 'wechat':
       return _wxLang()
+    case 'browser':
+      return window.navigator.language || ''
     default:
       break;
   }

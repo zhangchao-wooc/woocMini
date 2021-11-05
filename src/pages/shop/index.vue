@@ -1,9 +1,9 @@
 <template>
   <view class="personal_center">
     <view class="personal-info">
-      <nut-avatar bg-color="#fff" size="large" icon="https://img12.360buyimg.com/imagetools/jfs/t1/143702/31/16654/116794/5fc6f541Edebf8a57/4138097748889987.png"></nut-avatar>
-      <view class="nickname">{{t('back_to_home')}}</view>
-      <nut-icon class="icon" name="right"></nut-icon>
+      <view>
+        {{t('page.localeProvider')}}
+      </view>
     </view>
     <button @click="set">切换</button>   
     <button @click="to">返回</button> 

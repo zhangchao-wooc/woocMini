@@ -1,15 +1,16 @@
 /*
  * reload Pages refresh Data
  */
-const { env } = require('./env')
+const { _env } = require('./env')
 const { getCurrentPages } = require('@tarojs/taro')
 
 export const _reload = () => {
-  const _env = env()
   switch(_env) {
     case 'wechat':
       _wxReload()
       break;
+    case 'browser':
+      window.location.reload()
   }
 
 }

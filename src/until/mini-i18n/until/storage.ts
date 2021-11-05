@@ -1,21 +1,19 @@
 /*
  * get or set localStorage
  */
-const { env } = require('./env')
+const { _env } = require('./env')
 
 export const _storage = (handler: string, lang?: string) => {
-  const _env = env()
 
   switch (_env) {
     case 'wechat':
       const l = _wxStorage(handler, lang)
-      console.log(l);
-      
       return l
+    case 'browser':
+      return _browserStorage(handler, lang)
     default:
       throw `${_storage}: Does not support the current environment`
   }
-  
 }
 
 const _wxStorage = (h: string, lang?: string) => {
@@ -37,8 +35,14 @@ const _wxStorage = (h: string, lang?: string) => {
   } else {
     _errorLog('_wxStorage')
   }
-  
-  
+}
+
+const _browserStorage = (h: string, lang?: string) => {
+  if(h === 'get') {
+    return localStorage.getItem('tuya_locale')
+  } else if(h === 'set') {
+    localStorage.setItem('tuya_locale', lang || '')
+  }
 }
 
 const _errorLog = (p: string) => {
