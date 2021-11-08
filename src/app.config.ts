@@ -1,11 +1,11 @@
 export default {
   pages: [
-    // 'pages/personal_center/index',
-    'pages/home/index',
-    'pages/personal_center/index',
-    'pages/shop/index',
+    'pages/my/index',
 
-    
+    'pages/home/index',
+    'pages/classification/index',
+    'pages/discover/index',
+    'pages/shopping_cart/index',
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -18,6 +18,7 @@ export default {
     selectedColor: '#6600ff',
     backgroundColor: '#fff',
     borderStyle: 'black',
+    custom: true,
     list: [
       {
         pagePath: 'pages/home/index',
@@ -26,11 +27,21 @@ export default {
         selectedIconPath: './assets/home_selected.png'
       },
       {
-        pagePath: 'pages/personal_center/index',
+        pagePath: 'pages/classification/index',
+      },
+      {
+        pagePath: 'pages/discover/index',
+      },
+      {
+        pagePath: 'pages/shopping_cart/index',
+      },
+      {
+        pagePath: 'pages/my/index',
         text: '我的',
         iconPath: './assets/my.png',
         selectedIconPath: './assets/my_selected.png'
       }
     ],
   }
+  
 }

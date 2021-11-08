@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import locales from './locales'
 import { i18n, t } from './until/mini-i18n'
-import { InfiniteLoading, Avatar, Price, Cell, Button, Icon, Toast } from '@nutui/nutui-taro';
+import { ActionSheet, Popup, SearchBar, InfiniteLoading, Avatar, Price, Cell, Button, Icon, Toast, Tabbar, TabbarItem } from '@nutui/nutui-taro';
 import '@nutui/nutui-taro/dist/styles/themes/default.scss';
 import './app.scss'
 
@@ -28,6 +28,8 @@ const App = createApp({
   
 })
 
-App.use(Button).use(Icon).use(Cell).use(InfiniteLoading).use(Price).use(Avatar).use(Toast)
+App.use(Button).use(Icon).use(Cell).use(InfiniteLoading)
+.use(Price).use(Avatar).use(Toast).use(Tabbar).use(TabbarItem)
+.use(SearchBar).use(ActionSheet).use(Popup)
 
 export default App

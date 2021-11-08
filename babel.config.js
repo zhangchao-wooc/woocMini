@@ -8,14 +8,14 @@ module.exports = {
     }]
   ],
   plugins: [
-    // [
-    //   "import",
-    //   {
-    //     "libraryName": "@nutui/nutui-taro",
-    //     "libraryDirectory": "dist/packages/_es",
-    //     "camel2DashComponentName": false
-    //   },
-    //   'nutui3-taro'
-    // ]
+    [
+      "import",
+      {
+        "libraryName": "@nutui/nutui-taro",
+        "libraryDirectory": "dist/packages/_es",
+        "camel2DashComponentName": false
+      },
+      'nutui3-taro'
+    ]
   ]
 }

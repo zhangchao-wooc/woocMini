@@ -23,6 +23,9 @@
       "global.d.ts"
     ]
   },
+  "paths": {
+    "@/components": ["src/components"],
+  },
   "exclude": [
     "node_modules",
     "dist"

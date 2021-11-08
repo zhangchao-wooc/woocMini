@@ -1,5 +1,5 @@
 <template>
-  <view class="personal_center">
+  <view class="my">
     <view class="personal-info">
       <view>
         {{t('page.localeProvider')}}
@@ -7,17 +7,20 @@
     </view>
     <button @click="set">切换</button>   
     <button @click="to">返回</button> 
+    <tabbar :selected="3"></tabbar>
   </view>
 </template>
 
 <script lang="ts">
+import tabbar from '@/components/tabbar';
+
 import { onBeforeMount, onMounted, reactive, toRefs } from 'vue';
 import Taro from '@tarojs/taro'
 // import button from '../../components/button';
 export default {
   name: 'PersonalCenter',
   components: {
-  //  'demo-button': button
+    tabbar
   },
   setup(){
     const state = reactive({
@@ -39,7 +42,7 @@ export default {
     })
 
     onMounted(() => {
-      wx.setNavigationBarTitle({title: wx.$t('shop')})
+      // wx.setNavigationBarTitle({title: wx.$t('shop')})
     });
 
     return {
@@ -68,7 +71,7 @@ export default {
     to() {
       console.log('to');
       Taro.switchTab({
-        url: '/pages/personal_center/index'
+        url: '/pages/my/index'
       })
     }
   }
@@ -76,7 +79,7 @@ export default {
 </script>
 
 <style lang="scss">
-.personal_center {
+.my {
   .personal-info {
     position: relative;
     display: flex;

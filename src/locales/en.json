@@ -6,6 +6,13 @@
   "title": "title",
   "page.localeProvider": "page is not tabbar",
   "home": "Home",
+  "classification": "Classification",
+  "discover": "Discover",
+  "shoppingCart": "Shopping Cart",
   "my": "My",
-  "shop": "shop"
+  "language": "Language",
+  "chinese": "Chinese",
+  "english":" English",
+  "ok": "Ok",
+  "cancel": "Cancel"
 }
