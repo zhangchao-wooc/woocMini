@@ -1,11 +1,18 @@
 <template>
   <view class="home">
-    <nut-searchbar
-      class="searchbar"
-      v-model="searchValue4" 
-      background="linear-gradient(to right, #9866F0, #EB4D50)" 
-      input-background="#fff"
-    ></nut-searchbar>
+    <!-- <view class="home-header"></view> -->
+    <view class="searchbar">
+      <text class="header">WOOC</text>
+      <nut-searchbar
+        v-model="searchValue4"
+        background="transparent" 
+        input-background="#fff"
+      >
+        <template v-slot:rightin>
+          <nut-icon size="14" name="search2"></nut-icon>
+        </template>
+      </nut-searchbar>
+    </view>
 
     <view class="home-content">
       <swiper
@@ -56,6 +63,7 @@ export default {
   },
   setup(){
     const state = reactive({
+      safeArea: {},
       searchValue: '',
       swiperList: [
         {
@@ -147,10 +155,26 @@ export default {
 
     onMounted(() => {
       wx.setNavigationBarTitle({title: wx.$t('home')})
+      console.log();
+      const info = wx.getMenuButtonBoundingClientRect()
+      const t = document.getElementsByClassName('header')[0]
+      t.style.top = info.top + 'px'
+      t.style.lineHeight = info.height + 'px'
+      wx.getSystemInfoAsync({
+        success: res => {
+          console.log(res);
+        state.safeArea = res.safeArea
+        const { top, bottom} = state.safeArea
+        const t1 = document.getElementsByClassName('searchbar')[0]
+        
+        t1.style.paddingTop = top + 60 + 'px'
+        // t1.style.top = (top + 5) * -1 + 'px'
+        }
+      })
     });
 
     return {
-      refresh, loadMore, hasMore, ...toRefs(state)
+      onMounted, refresh, loadMore, hasMore, ...toRefs(state)
     }
   }
 }
@@ -162,7 +186,16 @@ export default {
     position: sticky;
     top: 0;
     z-index: 888;
+    background-image: linear-gradient(to right, #6600ff, #EB4D50);
+    .header {
+      position: fixed;
+      top: 0;
+      left: 15px;
+      color: #fff;
+      font-weight: bold;
+    }
   }
+  
   .home-content {
     padding: 10px 10px 48px;
     background-color: #eee;

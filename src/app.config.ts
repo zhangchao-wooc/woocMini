@@ -1,11 +1,12 @@
 export default {
   pages: [
-    'pages/my/index',
 
     'pages/home/index',
     'pages/classification/index',
     'pages/discover/index',
     'pages/shopping_cart/index',
+    'pages/my/index',
+
   ],
   window: {
     backgroundTextStyle: 'light',

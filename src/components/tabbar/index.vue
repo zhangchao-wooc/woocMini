@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { onBeforeMount, reactive, toRefs } from 'vue';
+import { onMounted, onBeforeMount, reactive, toRefs } from 'vue';
 import { eventCenter, getCurrentInstance } from '@tarojs/taro'
 
 export default {
@@ -67,6 +67,20 @@ export default {
         console.error(e);
       }
     }
+
+    onMounted(() => {
+      // wx.getSystemInfoAsync({
+      //   success: res => {
+      //     console.log(res);
+      //   const {bottom, height} = res.safeArea
+      //   const t1 = document.getElementsByClassName('nut-tabbar')[0]
+      //   console.log(t1.style);
+        
+      //   t1.style.height = 'none'
+      //   t1.style.padding = `${height}`
+      //   }
+      // })
+    });
     
     onBeforeMount(() => [
       eventCenter.on(getCurrentInstance().router.onShow, () => {
@@ -74,7 +88,7 @@ export default {
       })
     ])
 
-    return {onBeforeMount, tabSwitch, ...toRefs(state)}
+    return {onMounted, onBeforeMount, tabSwitch, ...toRefs(state)}
   }
 }
 </script>
