@@ -6,7 +6,8 @@ import '@nutui/nutui-taro/dist/styles/themes/default.scss';
 import './app.scss'
 
 i18n.init({
-  locales
+  locales,
+  themeColor: '#6600ff'
 })
 wx.$i18n = i18n
 wx.$t = t
@@ -22,7 +23,12 @@ const App = createApp({
     
   },
   onShow (options) {
+    // const l = i18n.getLocales()
+    // console.log('onShow', l, i18n.lang);
     
+    // if(l !== i18n.lang) {
+    //   i18n.setLocales(l)
+    // }
   },
   // 入口组件不需要实现 render 方法，即使实现了也会被 taro 所覆盖
   

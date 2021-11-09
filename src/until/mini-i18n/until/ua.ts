@@ -1,5 +1,6 @@
 // 浏览器语言标识 与 多语言部分语言标记 对应枚举
 export const region = {
+  // 浏览器对应语言标记
   'ar-eg': 'ar',
   'az-az': 'az',
   'bg-bg': 'bg',
@@ -65,4 +66,9 @@ export const region = {
   'ru': 'ru',
   'ko': 'ko',
   'ar': 'ar',
+  // 微信特有标记
+  'en': 'en',
+  // 支付宝特有标记
+  'zh-hans': 'zh-Hans',
+  'zh-hant': 'zh-tw'
 };

@@ -4,10 +4,13 @@
 const { _env } = require('./env')
 
 export const _storage = (handler: string, lang?: string) => {
-
+  let l = ''
   switch (_env) {
     case 'wechat':
-      const l = _wxStorage(handler, lang)
+      l = _wxStorage(handler, lang)
+      return l
+    case 'alipay':
+      l = _alipayStorage(handler, lang)
       return l
     case 'browser':
       return _browserStorage(handler, lang)
@@ -34,6 +37,27 @@ const _wxStorage = (h: string, lang?: string) => {
     })
   } else {
     _errorLog('_wxStorage')
+  }
+}
+
+const _alipayStorage = (h: string, lang?: string) => {
+  if(h === 'get') {
+    try {
+      const res = my.getStorageSync({ key: 'tuya_locale' })
+      if (!res.error) {
+        // Do something with return value
+        return res.data
+      }
+    } catch (e) {
+      // Do something when catch error
+    }
+  } else if(h === 'set') {
+    my.setStorage({
+      key: 'tuya_locale',
+      data: lang
+    })
+  } else {
+    _errorLog('_alipayStorage')
   }
 }
 

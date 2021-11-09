@@ -7,6 +7,8 @@ export const getLang = () => {
   switch (_env) {
     case 'wechat':
       return _wxLang()
+    case 'alipay':
+      return _alipayLang()
     case 'browser':
       return window.navigator.language || ''
     default:
@@ -18,6 +20,8 @@ const _wxLang = () => {
   let l
   wx.getSystemInfo({
     success: (res) => {
+      console.log('getSystemInfo', res);
+      
       l = res.language
     },
     fail: (err) => {
@@ -25,4 +29,8 @@ const _wxLang = () => {
     }
   })
   return l
+}
+
+const _alipayLang = () => {
+  return my.canIUse('env.language') || ''
 }
