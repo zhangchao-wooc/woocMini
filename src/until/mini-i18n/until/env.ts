@@ -1,10 +1,15 @@
+ /*
+  * current env
+  */
  function getEnv () {
-   console.log(window.navigator.languages, process);
    
-  if (wx) {
+  if (typeof wx !== 'undefined') {
     return 'wechat'
-  } else if (my) {
+  } else if (typeof my !== 'undefined') {
+    console.log('alipay');
     return 'alipay'
+  } else if (typeof window !== 'undefined') {
+    return 'browser'
   }
 }
 

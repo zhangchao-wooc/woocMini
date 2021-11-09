@@ -20,8 +20,6 @@ const _wxLang = () => {
   let l
   wx.getSystemInfo({
     success: (res) => {
-      console.log('getSystemInfo', res);
-      
       l = res.language
     },
     fail: (err) => {
@@ -32,5 +30,5 @@ const _wxLang = () => {
 }
 
 const _alipayLang = () => {
-  return my.canIUse('env.language') || ''
+  return my.env.language || ''
 }

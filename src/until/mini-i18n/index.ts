@@ -61,7 +61,6 @@ class I18n {
       this.langTag = tag
       _reload()
     }
-
   }
 
   updateLocale (obj: object) { // 更新已有语言文件的数据

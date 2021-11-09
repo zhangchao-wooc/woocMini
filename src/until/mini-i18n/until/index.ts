@@ -6,8 +6,6 @@ const { getLang } = require('./getLang')
 const { _listener } = require('./listener')
 const { _hint } = require('./hint')
 
-
-
 export {
   _env,
   region,
