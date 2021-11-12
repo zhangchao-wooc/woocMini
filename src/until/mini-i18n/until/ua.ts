@@ -1,5 +1,6 @@
+import { RegionType } from '@types';
 // 浏览器语言标识 与 多语言部分语言标记 对应枚举
-export const region = {
+export const region: RegionType = {
   // 浏览器对应语言标记
   'ar-eg': 'ar',
   'az-az': 'az',

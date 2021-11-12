@@ -38,7 +38,7 @@
           <view class="commodity-box" v-for="(item, index) in dataList" :key="index">
             <img class="commodity-img" :src="item.img" alt="">
             <view class="commodity-info">
-              <view class="commodity-info_name">{{item.name}}</view>
+              <view class="commodity-info_name">{{t(`${item.name}`)}}</view>
               <view class="commodity-info_tag"></view>
               <view class="commodity-info_price">
                 <nut-price :price="item.price" :decimal-digits="3" :need-symbol="true" :thousands="true" />
@@ -61,6 +61,9 @@ export default {
   components: {
     tabbar
   },
+  onShow() {
+      wx.setNavigationBarTitle({title: wx.$t('home')})
+  },
   setup(){
     const state = reactive({
       safeArea: {},
@@ -81,53 +84,65 @@ export default {
       ],
       dataList: [
         {
-          name: wx.$t('error500'),
+          name: 'error500',
           img: 'https://storage.360buyimg.com/jdc-article/NutUItaro34.jpg',
           price: '234',
           tag: []
         },
         {
-          name: wx.$t('refresh'),
+          name: 'refresh',
           img: 'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
           price: '567',
           tag: []
         },
         {
-          name: wx.$t('title'),
-          img: 'https://storage.360buyimg.com/jdc-article/welcomenutui.jpg',
-          price: '234',
+          name: 'home',
+          img: 'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
+          price: '567',
           tag: []
         },
         {
-          name: wx.$t('refresh'),
+          name: 'localeProvider',
           img: 'https://storage.360buyimg.com/jdc-article/NutUItaro34.jpg',
-          price: '890',
-          tag: []
-        },
-        {
-          name: wx.$t('error404'),
-          img: 'https://storage.360buyimg.com/jdc-article/welcomenutui.jpg',
           price: '234',
           tag: []
         },
         {
-          name: wx.$t('title'),
-          img: 'https://storage.360buyimg.com/jdc-article/welcomenutui.jpg',
-          price: '234',
+          name: 'shoppingCart',
+          img: 'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
+          price: '567',
           tag: []
         },
         {
-          name: wx.$t('refresh'),
+          name: 'back_to_home',
+          img: 'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
+          price: '567',
+          tag: []
+        },
+        {
+          name: 'home',
+          img: 'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
+          price: '567',
+          tag: []
+        },
+        {
+          name: 'localeProvider',
           img: 'https://storage.360buyimg.com/jdc-article/NutUItaro34.jpg',
-          price: '890',
+          price: '234',
           tag: []
         },
         {
-          name: wx.$t('error404'),
-          img: 'https://storage.360buyimg.com/jdc-article/welcomenutui.jpg',
-          price: '234',
+          name: 'shoppingCart',
+          img: 'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
+          price: '567',
           tag: []
-        }
+        },
+        {
+          name: 'back_to_home',
+          img: 'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
+          price: '567',
+          tag: []
+        },
       ]
     });
 
@@ -152,9 +167,10 @@ export default {
     const refresh = () => {
       console.log('refresh')
     }
-
+    const t = (id) => {
+      return wx.$t(id)
+    }
     onMounted(() => {
-      wx.setNavigationBarTitle({title: wx.$t('home')})
       console.log();
       const info = wx.getMenuButtonBoundingClientRect()
       const t = document.getElementsByClassName('header')[0]
@@ -174,7 +190,7 @@ export default {
     });
 
     return {
-      onMounted, refresh, loadMore, hasMore, ...toRefs(state)
+      t, onMounted, refresh, loadMore, hasMore, ...toRefs(state)
     }
   }
 }

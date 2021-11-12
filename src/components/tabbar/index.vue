@@ -4,7 +4,7 @@
       <nut-tabbar-item  
         v-for='item in tabbar'
         :key="item.path"
-        :tab-title="item.text" 
+        :tab-title="t(`${item.text}`)" 
         :icon="item.icon">
       </nut-tabbar-item>
     </nut-tabbar>
@@ -31,27 +31,27 @@ export default {
       active: props.selected,
       tabbar: [
         {
-          text: wx.$t('home'),
+          text: 'home',
           icon: 'home',
           path: '/pages/home/index'
         },
         {
-          text: wx.$t('classification'),
+          text: 'classification',
           icon: 'category',
           path: '/pages/classification/index'
         },
         {
-          text: wx.$t('discover'),
+          text:'discover',
           icon: 'find',
           path: '/pages/discover/index'
         },
         {
-          text: wx.$t('shoppingCart'),
+          text:'shoppingCart',
           icon: 'cart',
           path: '/pages/shopping_cart/index'
         },
         {
-          text: wx.$t('my'),
+          text: 'my',
           icon: 'my',
           path: '/pages/my/index'
         }
@@ -66,6 +66,10 @@ export default {
       } catch (e) {
         console.error(e);
       }
+    }
+
+    const t = (id:string) => {
+      return wx.$t(id)
     }
 
     onMounted(() => {
@@ -88,7 +92,7 @@ export default {
       })
     ])
 
-    return {onMounted, onBeforeMount, tabSwitch, ...toRefs(state)}
+    return {t, onMounted, onBeforeMount, tabSwitch, ...toRefs(state)}
   }
 }
 </script>

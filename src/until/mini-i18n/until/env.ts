@@ -1,12 +1,17 @@
  /*
   * current env
   */
+ declare global {
+  interface Window {
+    wx: any;
+    my: any; 
+  }
+}
+
  function getEnv () {
-   
-  if (typeof wx !== 'undefined') {
+  if (typeof window.wx !== 'undefined') {
     return 'wechat'
-  } else if (typeof my !== 'undefined') {
-    console.log('alipay');
+  } else if (typeof window.my !== 'undefined') {
     return 'alipay'
   } else if (typeof window !== 'undefined') {
     return 'browser'

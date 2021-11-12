@@ -1,7 +1,7 @@
 /*
  * get current language
  */
-const { _env } = require('./env')
+import { _env } from './env'
 
 export const getLang = () => {
   switch (_env) {
@@ -16,19 +16,19 @@ export const getLang = () => {
   }
 }
 
-const _wxLang = () => {
+function _wxLang () {
   let l
-  wx.getSystemInfo({
-    success: (res) => {
+  window.wx.getSystemInfo({
+    success: (res: { language: any }) => {
       l = res.language
     },
-    fail: (err) => {
+    fail: (err: any) => {
       console.error(err)
     }
   })
   return l
 }
 
-const _alipayLang = () => {
-  return my.env.language || ''
+function _alipayLang () {
+  return window.my.env.language || ''
 }

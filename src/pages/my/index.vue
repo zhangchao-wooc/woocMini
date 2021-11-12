@@ -33,6 +33,9 @@ export default {
   components: {
     tabbar
   },
+  onShow() {
+      wx.setNavigationBarTitle({title: wx.$t('my')})
+  },
   setup(){
     const state = reactive({
       msg: wx.$t('back_to_home'),
@@ -92,7 +95,6 @@ export default {
     })
 
     onMounted(() => {
-      wx.setNavigationBarTitle({title: wx.$t('my')})
     });
 
     return {

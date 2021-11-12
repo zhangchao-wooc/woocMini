@@ -1,28 +1,25 @@
-const {_listener, _env, getLang, region, _reload, _storage} = require('./until');
-interface configType {
-  locales: object;
-  defualtLang?: string;
-  lang?: string;
-  themeColor?: string;
-}
+import { _listener, _env, getLang, region, _reload, _storage } from './until';
+import { LangDataType, ConfigType } from '@types'
 
 // 多语言
 class I18n {
-  allLangData: object;
+  allLangData: LangDataType;
   lang: string;
   defualtLang: string;
   langTag: string;
   themeColor: string;
+  currentPath: string;
   constructor () {
     this.allLangData = Object.create(null)
     this.lang = 'en-US'
     this.defualtLang = 'en-US'
     this.langTag = 'en'
     this.themeColor = '#000'
+    this.currentPath = ''
     _listener(this)
   }
 
-  init (config: configType) {
+  init (config: ConfigType) {
     this.themeColor = config.themeColor || '#000'
     this.allLangData = config.locales ||  Object.create(null)
     this.defualtLang = config.defualtLang || 'en-US'
@@ -53,23 +50,22 @@ class I18n {
     const langList = this.getLanguagePackList()
     const tag = this._formatLanguageTag(lang)
     const index = langList.findIndex(item => item === tag)
-    console.log('set', langList, this._formatLanguageTag(lang), index);
     
     if(index !== -1) {
       _storage('set', lang)
       this.lang = lang
       this.langTag = tag
-      _reload()
+      _reload(this)
     }
   }
 
-  updateLocale (obj: object) { // 更新已有语言文件的数据
-    Object.keys(obj).forEach(item => {
-      Object.keys(obj[item]).forEach(key => {
+  updateLocale (obj: LangDataType) { // 更新语言文件的数据
+    Object.keys(obj).forEach((item:string) => {
+      Object.keys(obj[item]).forEach((key:string) => {
         this.allLangData[item][key] = obj[item][key]
       })
     })
-    _reload()
+    _reload(this)
   }
 
   // 小程序语言标记：zh_CN  浏览器语言标记：zh-CN 不一致。统一转化为zh-cn 小写 + '-', return region中对应的语言标记
@@ -77,7 +73,8 @@ class I18n {
     try {
       const lang = s.includes('_') ? s.replace('_', '-').toLowerCase() : s.toLowerCase()
       return region[lang]
-    } catch {
+    } catch (err) {
+      console.log(err);
       throw `Please check if the lang tag ${s} is correct`
     }
   }

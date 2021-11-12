@@ -1,10 +1,10 @@
-const { _env } = require('./env')
-const { region } = require('./ua')
-const { _reload } = require('./reload')
-const { _storage } = require('./storage')
-const { getLang } = require('./getLang')
-const { _listener } = require('./listener')
-const { _hint } = require('./hint')
+import { _env } from './env'
+import { region } from './ua'
+import { _reload } from './reload'
+import { _storage } from './storage'
+import { getLang } from './getLang'
+import { _listener } from './listener'
+import { _hint } from './hint'
 
 export {
   _env,
