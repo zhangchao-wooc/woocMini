@@ -1,8 +1,8 @@
 <template>
   <view class="my">
-    <view class="my-info">
-      <image class="avatar" src="https://img12.360buyimg.com/imagetools/jfs/t1/143702/31/16654/116794/5fc6f541Edebf8a57/4138097748889987.png" />
-      <view class="nickname">{{t('back_to_home')}}</view>
+    <view class="my-info" @click="catMyInfo">
+      <image class="avatar" :src="userInfo.userInfo.avatarUrl" />
+      <view class="nickname">{{userInfo.userInfo.nickName}}</view>
       <nut-icon class="icon" name="right"></nut-icon>
     </view>
     <view class="my-button">
@@ -19,22 +19,25 @@
       @choose="chooseItem"
       :cancel-txt='t("cancel")'
     ></nut-actionsheet>
-    <tabbar :selected="4"></tabbar>
+    <tabbar :selected="2"></tabbar>
+    <login :show="showLoginPage" :callback="loginCallback" />
   </view>
 </template>
 
 <script lang="ts">
-import tabbar from '@/components/tabbar';
 import { onBeforeMount, onMounted, reactive, toRefs } from 'vue';
 import Taro from '@tarojs/taro'
+import tabbar from '@/components/tabbar';
+import login from '@/components/login'
 
 export default {
   name: 'PersonalCenter',
   components: {
-    tabbar
+    tabbar,
+    login
   },
   onShow() {
-      wx.setNavigationBarTitle({title: wx.$t('my')})
+    wx.setNavigationBarTitle({title: wx.$t('my')})
   },
   setup(){
     const state = reactive({
@@ -54,12 +57,16 @@ export default {
           name: wx.$t('english'),
           value: 'en_US'
         },
-      ]
+      ],
+      showLoginPage: false,
+      userInfo: {
+        userInfo: {
+          avatarUrl: '',
+          nickName: '未登录'
+        }
+      },
+      isLogin: false
     });
-
-    const t = (id:string) => {
-      return wx.$t(id)
-    }
 
     const switchActionSheet = () => {
       state.isVisible = !state.isVisible
@@ -67,7 +74,7 @@ export default {
 
     const chooseItem = (item) => {
       state.language = item.name
-      console.log(state.language, item.name, t(item.name));
+      console.log(state.language, item.name, wx.$t(item.name));
       
       wx.$i18n.setLocales(item.value)
     }
@@ -84,18 +91,37 @@ export default {
     }
 
     onBeforeMount(() => {
-      wx.getSystemInfoAsync({
-        success: res => {
-          console.log(res);
-        }
-      })
-      const info = wx.getDeviceInfo()
-      console.log(info);
-      // state.language = wx.$i18n.getLocales()
+
     })
 
     onMounted(() => {
+      const l = Taro.getStorageSync('userInfo')
+      console.log(l);
+      
+      if (l) {
+        state.userInfo = l
+        state.isLogin = true
+      }
     });
+
+    function catMyInfo () {
+      if(!state.isLogin) {
+        state.showLoginPage = true
+      }
+      
+    }
+
+    function loginCallback (res: any) {
+      console.log(res);
+      
+      if(res) {
+        state.userInfo = res
+        state.isLogin = true
+      }
+      console.log('callback', state.userInfo);
+      
+      state.showLoginPage = false
+    }
 
     return {
       ...toRefs(state),
@@ -103,14 +129,15 @@ export default {
       onMounted,
       onBeforeMount,
       prompt,
-      t,
       switchActionSheet,
-      chooseItem
+      chooseItem,
+      catMyInfo,
+      loginCallback
     }
   },
   created() {
     // console.log('123', wx.t);
-    console.log(wx.$t('back_to_home'));
+    // console.log(t('back_to_home'));
   },
   methods: {
     set() {
@@ -118,9 +145,9 @@ export default {
       wx.$i18n.setLocales( a === 'en-US' ? 'zh-CN':  'en-US')
       
     },
-    t(id) {
-      return wx.$t(id)
-    },
+    // t(id) {
+    //   return wx.$t(id)
+    // },
     to() {
       console.log('to');
       

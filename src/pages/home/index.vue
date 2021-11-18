@@ -38,7 +38,7 @@
           <view class="commodity-box" v-for="(item, index) in dataList" :key="index">
             <img class="commodity-img" :src="item.img" alt="">
             <view class="commodity-info">
-              <view class="commodity-info_name">{{t(`${item.name}`)}}</view>
+              <view class="commodity-info_name">{{t(item.name)}}</view>
               <view class="commodity-info_tag"></view>
               <view class="commodity-info_price">
                 <nut-price :price="item.price" :decimal-digits="3" :need-symbol="true" :thousands="true" />
@@ -49,25 +49,38 @@
         </view>
       </nut-infiniteloading>
     </view>    
-    <tabbar :selected="0"></tabbar>
+    <WTabbar :selected="0"></WTabbar>
   </view>
 </template>
 
 <script lang="ts">
-import tabbar from '@/components/tabbar';
+import WTabbar from '@/components/tabbar';
+import WAudioVideo from '@/components/audio_video';
+import { i18n, t } from '@wooc/mini-i18n'
+
 import { onMounted, reactive, ref, toRefs } from 'vue';
 export default {
   name: 'Home',
   components: {
-    tabbar
+    WTabbar,
+    WAudioVideo
+  },
+  beforeMount () {
+    
+    
   },
   onShow() {
-      wx.setNavigationBarTitle({title: wx.$t('home')})
+    
+    console.log(i18n._formatLanguageTag('123'));
+    // wx.setNavigationBarTitle({title: t('home')})
+      
   },
-  setup(){
+  setup(props){
     const state = reactive({
       safeArea: {},
       searchValue: '',
+      videoUrl: 'https://airtake-private-data-1254153901.cos.ap-shanghai.myqcloud.com/smart/pontos/1636626544f5966261418.mov?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDopcCYgw0qRoyV5qfKjvg2pPkqESnb5zI%26q-sign-time%3D1636898199%3B1636901799%26q-key-time%3D1636898199%3B1636901799%26q-header-list%3Dhost%26q-url-param-list%3D%26q-signature%3D042c4ffd339df0c90e2e317a947020f9e756b277',
+      audioUrl: 'https://upos-hz-mirrorakam.akamaized.net/upgcxcode/97/50/251345097/251345097-1-30280.m4s?e=ig8euxZM2rNcNbdlhoNvNC8BqJIzNbfqXBvEqxTEto8BTrNvN0GvT90W5JZMkX_YN0MvXg8gNEV4NC8xNEV4N03eN0B5tZlqNxTEto8BTrNvNeZVuJ10Kj_g2UB02J0mN0B5tZlqNCNEto8BTrNvNC7MTX502C8f2jmMQJ6mqF2fka1mqx6gqj0eN0B599M=&uipk=5&nbs=1&deadline=1636827070&gen=playurlv2&os=akam&oi=312668868&trid=de99dffc742347cdafa566afa885d488u&platform=pc&upsig=94c5f8e2ccbc3194bcb776106540fbab&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&hdnts=exp=1636827070~hmac=a19f35a6dffa3d0d4ecb1552dcf7cc59ca28a3e89d6d149d7a21bea54c973103&mid=482041345&bvc=vod&nettype=0&orderid=1,2&agrr=1&bw=16338&logo=40000000',
       swiperList: [
         {
           img: 'https://storage.360buyimg.com/jdc-article/NutUItaro34.jpg',
@@ -94,55 +107,7 @@ export default {
           img: 'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
           price: '567',
           tag: []
-        },
-        {
-          name: 'home',
-          img: 'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
-          price: '567',
-          tag: []
-        },
-        {
-          name: 'localeProvider',
-          img: 'https://storage.360buyimg.com/jdc-article/NutUItaro34.jpg',
-          price: '234',
-          tag: []
-        },
-        {
-          name: 'shoppingCart',
-          img: 'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
-          price: '567',
-          tag: []
-        },
-        {
-          name: 'back_to_home',
-          img: 'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
-          price: '567',
-          tag: []
-        },
-        {
-          name: 'home',
-          img: 'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
-          price: '567',
-          tag: []
-        },
-        {
-          name: 'localeProvider',
-          img: 'https://storage.360buyimg.com/jdc-article/NutUItaro34.jpg',
-          price: '234',
-          tag: []
-        },
-        {
-          name: 'shoppingCart',
-          img: 'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
-          price: '567',
-          tag: []
-        },
-        {
-          name: 'back_to_home',
-          img: 'https://storage.360buyimg.com/jdc-article/NutUItaro2.jpg',
-          price: '567',
-          tag: []
-        },
+        }
       ]
     });
 
@@ -167,11 +132,11 @@ export default {
     const refresh = () => {
       console.log('refresh')
     }
-    const t = (id) => {
-      return wx.$t(id)
-    }
+    // const t = (id) => {
+    //   return wx.$t(id)
+    // }
     onMounted(() => {
-      console.log();
+      console.log(props);
       const info = wx.getMenuButtonBoundingClientRect()
       const t = document.getElementsByClassName('header')[0]
       t.style.top = info.top + 'px'
@@ -190,14 +155,19 @@ export default {
     });
 
     return {
-      t, onMounted, refresh, loadMore, hasMore, ...toRefs(state)
+       onMounted, refresh, loadMore, hasMore, ...toRefs(state)
     }
+  },
+  created() {
+    // console.log(t('home'));
   }
 }
 </script>
 
 <style lang="scss">
 .home {
+  height: 100vh;
+  background-color: #eee;
   .searchbar {
     position: sticky;
     top: 0;

@@ -1,6 +1,6 @@
 <template>
   <div class="w-tabbar">
-    <nut-tabbar @tab-switch="tabSwitch" :bottom="true" v-model:visible="active">
+    <nut-tabbar id="tabbar" @tab-switch="tabSwitch" :bottom="true" v-model:visible="active" :style="{height: height + 'px'}">
       <nut-tabbar-item  
         v-for='item in tabbar'
         :key="item.path"
@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { onMounted, onBeforeMount, reactive, toRefs } from 'vue';
-import { eventCenter, getCurrentInstance } from '@tarojs/taro'
+import Taro, { eventCenter, getCurrentInstance } from '@tarojs/taro'
 
 export default {
   name: 'tabbar',
@@ -23,11 +23,9 @@ export default {
       default: 0
     }
   },
-  onShow () {
-    console.log(123)
-  },
   setup (props) {
     const state = reactive({
+      height: 50,
       active: props.selected,
       tabbar: [
         {
@@ -36,19 +34,9 @@ export default {
           path: '/pages/home/index'
         },
         {
-          text: 'classification',
+          text: 'tool',
           icon: 'category',
-          path: '/pages/classification/index'
-        },
-        {
-          text:'discover',
-          icon: 'find',
-          path: '/pages/discover/index'
-        },
-        {
-          text:'shoppingCart',
-          icon: 'cart',
-          path: '/pages/shopping_cart/index'
+          path: '/pages/tool/index'
         },
         {
           text: 'my',
@@ -68,22 +56,19 @@ export default {
       }
     }
 
-    const t = (id:string) => {
-      return wx.$t(id)
-    }
+    // const t = (id:string) => {
+    //   return wx.$t(id)
+    // }
 
     onMounted(() => {
-      // wx.getSystemInfoAsync({
-      //   success: res => {
-      //     console.log(res);
-      //   const {bottom, height} = res.safeArea
-      //   const t1 = document.getElementsByClassName('nut-tabbar')[0]
-      //   console.log(t1.style);
-        
-      //   t1.style.height = 'none'
-      //   t1.style.padding = `${height}`
-      //   }
-      // })
+      const d = document.getElementsByClassName('nut-tabbar')[0]
+      console.log(d);
+      Taro.getSystemInfo({
+        complete: res => {
+          console.log(res);
+          state.height = 50 + res.statusBarHeight / 2
+        }
+      })
     });
     
     onBeforeMount(() => [
@@ -92,7 +77,12 @@ export default {
       })
     ])
 
-    return {t, onMounted, onBeforeMount, tabSwitch, ...toRefs(state)}
+    return { onMounted, onBeforeMount, tabSwitch, ...toRefs(state)}
+  },
+  mounted () {
+      // const d = document.getElementsByClassName('nut-tabbar')[0]
+
+    
   }
 }
 </script>

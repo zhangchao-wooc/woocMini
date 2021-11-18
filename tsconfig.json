@@ -11,6 +11,7 @@
     "outDir": "lib",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "strict": true,
     "strictNullChecks": true,
     "sourceMap": true,
     "baseUrl": ".",
@@ -24,7 +25,7 @@
     ]
   },
   "paths": {
-    "@/components": ["src/components"],
+    "@/components": ["./src/components"],
   },
   "exclude": [
     "node_modules",

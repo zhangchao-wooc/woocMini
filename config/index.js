@@ -36,7 +36,7 @@ const config = {
       pxtransform: {
         enable: true,
         config: {
-
+          selectorBlackList: ['body']
         }
       },
       url: {

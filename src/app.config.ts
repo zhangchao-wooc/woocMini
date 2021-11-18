@@ -2,9 +2,7 @@ export default {
   pages: [
 
     'pages/home/index',
-    'pages/classification/index',
-    'pages/discover/index',
-    'pages/shopping_cart/index',
+    'pages/tool/index',
     'pages/my/index',
 
   ],
@@ -28,13 +26,7 @@ export default {
         selectedIconPath: './assets/home_selected.png'
       },
       {
-        pagePath: 'pages/classification/index',
-      },
-      {
-        pagePath: 'pages/discover/index',
-      },
-      {
-        pagePath: 'pages/shopping_cart/index',
+        pagePath: 'pages/tool/index',
       },
       {
         pagePath: 'pages/my/index',
