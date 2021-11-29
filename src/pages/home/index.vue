@@ -56,6 +56,7 @@
 <script lang="ts">
 import WTabbar from '@/components/tabbar';
 import WAudioVideo from '@/components/audio_video';
+import Taro from '@tarojs/taro'
 import { i18n, t } from '@wooc/mini-i18n'
 
 import { onMounted, reactive, ref, toRefs } from 'vue';
@@ -70,10 +71,9 @@ export default {
     
   },
   onShow() {
+    Taro.setNavigationBarTitle({title: t('home')})
+    console.log(i18n);
     
-    console.log(i18n._formatLanguageTag('123'));
-    // wx.setNavigationBarTitle({title: t('home')})
-      
   },
   setup(props){
     const state = reactive({
@@ -132,16 +132,13 @@ export default {
     const refresh = () => {
       console.log('refresh')
     }
-    // const t = (id) => {
-    //   return wx.$t(id)
-    // }
     onMounted(() => {
       console.log(props);
-      const info = wx.getMenuButtonBoundingClientRect()
+      const info = Taro.getMenuButtonBoundingClientRect()
       const t = document.getElementsByClassName('header')[0]
       t.style.top = info.top + 'px'
       t.style.lineHeight = info.height + 'px'
-      wx.getSystemInfoAsync({
+      Taro.getSystemInfo({
         success: res => {
           console.log(res);
         state.safeArea = res.safeArea

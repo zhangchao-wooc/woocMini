@@ -26,6 +26,7 @@
 
 <script lang="ts">
 import { onBeforeMount, onMounted, reactive, toRefs } from 'vue';
+import { i18n, t } from '@wooc/mini-i18n'
 import Taro from '@tarojs/taro'
 import tabbar from '@/components/tabbar';
 import login from '@/components/login'
@@ -37,11 +38,11 @@ export default {
     login
   },
   onShow() {
-    wx.setNavigationBarTitle({title: wx.$t('my')})
+    Taro.setNavigationBarTitle({title: t('my')})
   },
   setup(){
     const state = reactive({
-      msg: wx.$t('back_to_home'),
+      msg: t('back_to_home'),
       msg2: '你成功了～',
       type: 'text',
       show: false,
@@ -50,11 +51,11 @@ export default {
       isVisible: false,
       menuItems: [
         {
-          name: wx.$t('chinese'),
+          name: t('chinese'),
           value: 'zh_CN'
         },
         {
-          name: wx.$t('english'),
+          name: t('english'),
           value: 'en_US'
         },
       ],
@@ -74,9 +75,9 @@ export default {
 
     const chooseItem = (item) => {
       state.language = item.name
-      console.log(state.language, item.name, wx.$t(item.name));
+      console.log(state.language, item.name, t(item.name));
       
-      wx.$i18n.setLocales(item.value)
+      i18n.setLocales(item.value)
     }
 
     const handleClick = (type: string, msg: string, cover: boolean = false) => {
@@ -141,8 +142,8 @@ export default {
   },
   methods: {
     set() {
-      const a = wx.$i18n.getLocales()
-      wx.$i18n.setLocales( a === 'en-US' ? 'zh-CN':  'en-US')
+      const a = i18n.getLocales()
+      i18n.setLocales( a === 'en-US' ? 'zh-CN':  'en-US')
       
     },
     // t(id) {
@@ -156,8 +157,8 @@ export default {
       })
     },
     update() {
-      wx.cloud.init()
-      wx.cloud.callFunction({
+      Taro.cloud.init()
+      Taro.cloud.callFunction({
         name: 'lang',
         data: {
           moduleName: 'mini',
@@ -168,7 +169,7 @@ export default {
       }).then(res => {
         const d = res.result.data[0].locales
 
-        wx.$i18n.updateLocale(d)
+        i18n.updateLocale(d)
 
       })
     }
