@@ -16,5 +16,11 @@
   "ok": "确定",
   "cancel": "取消",
   
-  "tool.metronome": "节拍器"
+  "tool.metronome": "节拍器",
+  "tool.metronome.speed": "速度",
+  "tool.metronome.selectSpeed": "速度",
+  "tool.metronome.meter": "节拍",
+  "tool.metronome.selectMeter": "节拍"
+
+
 }

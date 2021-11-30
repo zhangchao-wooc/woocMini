@@ -184,6 +184,10 @@ export default {
   background-color: #eee;
   .my-button {
     padding: 0 10px;
+    .nut-cell {
+      line-height: 30px;
+      font-size: 16px;
+    }
   }
   .my-info {
     position: relative;

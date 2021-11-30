@@ -1,8 +1,9 @@
 export default {
   pages: [
+    'pages/tool/index',
     'pages/tool/metronome/index',
     'pages/home/index',
-    'pages/tool/index',
+    // 'pages/tool/index',
     'pages/my/index',
     // 'pages/tool/metronome/index'
   ],

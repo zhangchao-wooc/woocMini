@@ -14,5 +14,11 @@
   "chinese": "Chinese",
   "english":" English",
   "ok": "Ok",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+
+  "tool.metronome": "metronome",
+  "tool.metronome.speed": "speed",
+  "tool.metronome.selectSpeed": "Select speed",
+  "tool.metronome.meter": "meter",
+  "tool.metronome.selectMeter": "Choose beat"
 }

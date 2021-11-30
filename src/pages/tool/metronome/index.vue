@@ -3,17 +3,18 @@
   <view class="metronome">
     <view class="metronome-content">
       <div class="metronome-content-view">
-        展示区
+        <view v-for="item in meter" :key="item" class="meter-item">{{item}}</view>
       </div>
       <div class="metronome-content-set">
         <!-- 速度 -->
-        <nut-button @click="set(1)">速度 {{speed}}</nut-button>
+        <nut-button @click="set(1)">{{t('tool.metronome.speed')}} {{ speed}}</nut-button>
         <!-- 节拍 -->
-        <nut-button @click="set(2)">节拍 {{meter}}</nut-button>
+        <nut-button @click="set(2)">{{t('tool.metronome.meter')}} {{ meter}}</nut-button>
       </div>
     </view>
     <view class="metronome-btn">
       <nut-icon 
+        class="icon"
         :name="isPlay ? 'poweroff-circle-fill' : 'play-circle-fill'"
         style="font-size: 200px; transition: all 0.3s"
         @click="play"
@@ -28,24 +29,27 @@
       :style="{ height: '30%' }"
       v-model:visible="isVisible"
     >
+      <!-- 速度 -->
       <view v-if="mode === 1" class="select-speed">
-        <view class="title">选择速度</view>
-        <nut-range v-model="speed" @change="onSpeedChange"></nut-range>
+        <view class="title">{{t('tool.metronome.selectSpeed')}}</view>
+        <nut-range v-model="speed" @change="onSpeedChange" ></nut-range>
       </view>
-      <view v-if="mode === 2" class="select-meter">
-        <view class="title">选择节拍</view>
+      <!-- 节拍 -->
+      <view v-else class="select-meter">
+        <view class="title">{{t('tool.metronome.selectMeter')}}</view>
         <view class="meterList">
           <nut-tag 
             mark 
             type="primary" 
             @click="selectMeter(item)"  
-            v-for="item in meterList" 
-            :key="item.name"
+            v-for="item in 12" 
+            :key="item"
           >
-            {{item.name}}
+            {{item}}
           </nut-tag>
         </view>
       </view>
+
     </nut-popup>
   </view>
 </template>
@@ -54,6 +58,8 @@
 import Taro from '@tarojs/taro'
 import { onMounted, reactive, toRefs } from 'vue';
 import { i18n, t } from '@wooc/mini-i18n'
+const innerAudioContext = Taro.createInnerAudioContext()
+
 export default {
   setup () {
     const state = reactive({
@@ -61,32 +67,33 @@ export default {
       isVisible: false,
       mode: 1, // 1、setSpeed 2、setMeter
       speed: 60,
-      meter: '3/4',
-      meterList: [
-        {
-          name: '1/4',
-          meter: '1'
-        },
-        {
-          name: '2/4',
-          meter: '2'
-        },
-        {
-          name: '3/4',
-          meter: '3'
-        },
-        {
-          name: '4/4',
-          meter: '4'
-        }
-      ]
+      meter: 3,
     })
 
     const play = (item) => {
+      const d = document.getElementsByClassName('icon')[0]
+      const e = document.getElementsByClassName('metronome')[0]
+
+      e.style.animation = !state.isPlay ? 'pulse 3s linear infinite;' : ''
       state.isPlay = !state.isPlay
+      audio()
+    }
+
+    const audio = () => {
+      
+      innerAudioContext.autoplay = state.isPlay
+      innerAudioContext.src = 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E061FF02C31F716658E5C81F5594D561F2E88B854E81CAAB7806D5E4F103E55D33C16F3FAC506D1AB172DE8600B37E43FAD&fromtag=46'
+      innerAudioContext.onPlay(() => {
+        console.log('开始播放')
+      })
+      innerAudioContext.onError((res) => {
+        console.log(res.errMsg)
+        console.log(res.errCode)
+      })
     }
 
     const onSpeedChange = (v) => {
+      console.log(v);
       state.speed = v
     }
 
@@ -96,7 +103,7 @@ export default {
     }
 
     const selectMeter = (item) => {
-      state.meter = item.name
+      state.meter = item
       close()
     }
 
@@ -120,9 +127,23 @@ export default {
     width: 100vw;
     height: 50vh;
     .metronome-content-view {
-      display: grid;
-      place-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-flow: wrap;
       height: calc(100% - 60px);
+      padding: 0 10px;
+      .meter-item {
+        display: grid;
+        place-items: center;
+        width: 50px;
+        height: 50px;
+        margin: 0 5px;
+        border-radius: 50%;
+        background-color: $shadow9-background;
+        box-shadow: inset 5px 5px 10px #d9d9d9,
+            inset -5px -5px 10px #ffffff;;
+      }
     }
     .metronome-content-set {
       position: absolute;
@@ -134,7 +155,10 @@ export default {
       .nut-button {
         width: 150px;
         height: 60px;
-        box-shadow: 0 0 5px 5px rgba($color: #000000, $alpha: 0.05);
+        border: 0px;
+        border-radius: 20px;
+        background-color: #fff;
+        box-shadow: $primary-shadow9;
       }
     }
   } 
@@ -143,6 +167,15 @@ export default {
     height: 50vh;
     display: grid;
     place-items: center;
+    .nut-icon {
+      width: 165px;
+      height: 165px;
+      background-color: $primary-color;
+      border-radius: 50%;
+      box-shadow: 0px 0px 10px 10px rgba($color: $primary-color, $alpha: 0.2),
+      0px 0px 10px 10px rgba($color: red, $alpha: 0.2),
+      0px 0px 10px 10px rgba($color: #fff, $alpha: 0.2);
+    }
   }
   .select-speed,.select-meter {
     padding: 10px;
@@ -161,6 +194,17 @@ export default {
       grid-template-columns: repeat(auto-fill, 60px);
       grid-template-rows: 30px;
       gap: 10px;
+    }
+  }
+  @keyframes pulse {
+    0% { 
+      filter: hue-rotate(0);
+    }
+    50% { 
+      filter: hue-rotate(90deg); 
+    }
+    100% {
+      filter: hue-rotate(0deg); 
     }
   }
 }

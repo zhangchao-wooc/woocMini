@@ -1,2 +1,7 @@
 $primary-color: #6600ff;
 $primary-color-end: #496AF2;
+/* rgba的四个值分别为：红(R)、绿(G)、蓝(B)、透明度(A) */
+$primary-shadow9: 9px 9px 18px #e6e6e6, -9px -9px 18px #ffffff;
+$shadow9-background: linear-gradient(145deg, #e6e6e6, #fff);
+$primary-shadow8: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+$shadow8-background: linear-gradient(145deg, #cacaca, #f0f0f0);

@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import i18 from './plugins/t'
 import locales from './locales'
 import { i18n, t } from '@wooc/mini-i18n'
-import { Tag, Range, Tabs, TabPane, ActionSheet, Popup, SearchBar, InfiniteLoading, Avatar, Price, Cell, Button, Icon, Toast, Tabbar, TabbarItem } from '@nutui/nutui-taro';
+import { Navbar, Tag, Range, Tabs, TabPane, ActionSheet, Popup, SearchBar, InfiniteLoading, Avatar, Price, Cell, Button, Icon, Toast, Tabbar, TabbarItem } from '@nutui/nutui-taro';
 import '@nutui/nutui-taro/dist/styles/themes/default.scss';
 import './app.scss'
 
@@ -31,6 +31,6 @@ const App = createApp({
 
 App.use(i18, t).use(Button).use(Icon).use(Cell).use(InfiniteLoading)
 .use(Price).use(Avatar).use(Toast).use(Tabbar).use(TabbarItem)
-.use(SearchBar).use(ActionSheet).use(Popup).use(Tabs).use(TabPane).use(Range).use(Tag)
+.use(SearchBar).use(ActionSheet).use(Popup).use(Tabs).use(TabPane).use(Range).use(Tag).use(Navbar)
 
 export default App

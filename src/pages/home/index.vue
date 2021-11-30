@@ -124,11 +124,6 @@ export default {
         done()
       }, 500);
     };
-    // const init = () => {
-    //   for (let i = 0; i < 10; i++) {
-    //     state.dataList.push(`${i}`);
-    //   }
-    // }
     const refresh = () => {
       console.log('refresh')
     }
@@ -140,13 +135,10 @@ export default {
       t.style.lineHeight = info.height + 'px'
       Taro.getSystemInfo({
         success: res => {
-          console.log(res);
         state.safeArea = res.safeArea
-        const { top, bottom} = state.safeArea
+        const { top } = state.safeArea
         const t1 = document.getElementsByClassName('searchbar')[0]
-        
         t1.style.paddingTop = top + 60 + 'px'
-        // t1.style.top = (top + 5) * -1 + 'px'
         }
       })
     });
@@ -155,9 +147,6 @@ export default {
        onMounted, refresh, loadMore, hasMore, ...toRefs(state)
     }
   },
-  created() {
-    // console.log(t('home'));
-  }
 }
 </script>
 
@@ -170,6 +159,7 @@ export default {
     top: 0;
     z-index: 888;
     background-image: linear-gradient(to right, #6600ff, #EB4D50);
+    animation: pulse 9s linear infinite;
     .header {
       position: fixed;
       top: 0;
@@ -206,6 +196,14 @@ export default {
     }
   }
 }
+@keyframes pulse {
+    0% { 
+      filter: hue-rotate(0);
+    }
+    100% {
+      filter: hue-rotate(360deg); 
+    }
+  }
 
 
 </style>

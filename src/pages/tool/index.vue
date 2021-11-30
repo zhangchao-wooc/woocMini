@@ -6,10 +6,11 @@
         :key="index" 
         @click="jump(item)"
       >
-        <image class="img" lazy-load="true" :src="item.img" alt="" />
+        <image class="img" lazy-load="true" src="../../assets/metronome.png" alt="" />
         <view class="title">{{t(item.name)}}</view>
       </view>
     </view>
+    
     <tabbar :selected="1"></tabbar>
   </view>
 </template>
@@ -52,26 +53,29 @@ export default {
 <style lang="scss">
 .tool {
   height: 100vh;
-  background-color: #eee;
+  background-color: #fff;
   .tool-box {
-    padding: 10px;
+    padding: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
+    grid-gap: 20px;
     .tool-box_item {
       position: relative;
       background-color: #fff;
       border-radius: 5%;
       overflow: hidden;
-      box-shadow: 0 0 5px 5px rgba(0,0,0,.1);
+      background: $shadow9-background;
+      box-shadow: $primary-shadow9;
+      box-sizing: border-box;
       .img {
-        padding: 5px;
+        padding: 10px;
         width: 100%;
-        height: 150px;
+        height: 120px;
         object-fit: fill;
+        box-sizing: border-box;
       }
       .title {
-        padding: 10px;
+        padding: 5px;
         text-align: center;
         font-weight: bold;
       }

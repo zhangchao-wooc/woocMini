@@ -48,7 +48,7 @@ export default {
 
     const tabSwitch = (item: object, index: number) => {
       try {
-        wx.switchTab({
+        Taro.switchTab({
           url: state.tabbar[index].path
         })
       } catch (e) {
