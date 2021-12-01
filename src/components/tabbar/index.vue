@@ -16,7 +16,7 @@ import { onMounted, onBeforeMount, reactive, toRefs } from 'vue';
 import Taro, { eventCenter, getCurrentInstance } from '@tarojs/taro'
 
 export default {
-  name: 'tabbar',
+  name: 'Tabbar',
   props: {
     selected: {
       type: Number,

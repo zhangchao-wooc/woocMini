@@ -6,7 +6,7 @@
         :key="index" 
         @click="jump(item)"
       >
-        <image class="img" lazy-load="true" src="../../assets/metronome.png" alt="" />
+        <image class="img" lazy-load="true" aspectFill :src="item.img" alt="" />
         <view class="title">{{t(item.name)}}</view>
       </view>
     </view>
@@ -20,6 +20,8 @@ import { onMounted, reactive, toRefs } from 'vue';
 import { i18n, t } from '@wooc/mini-i18n'
 import Taro from '@tarojs/taro'
 import tabbar from '@/components/tabbar';
+import {compass,
+  metronome} from '@/assets'
 
 export default {
   components: {
@@ -31,8 +33,13 @@ export default {
       dataList: [
         {
           name: 'tool.metronome',
-          img: '../../assets/metronome.png',
+          img: metronome,
           route: 'metronome/index',
+        },
+        {
+          name: 'tool.compass',
+          img: compass,
+          route: 'compass/index',
         },
       ]
     })
@@ -42,6 +49,8 @@ export default {
     }
     
     onMounted(() => {
+      console.log(compass,
+  metronome);
       Taro.setNavigationBarTitle({title: ''})
     })
       
@@ -57,25 +66,25 @@ export default {
   .tool-box {
     padding: 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, 150px);
+    grid-template-rows: repeat(auto-fill, 150px);
+    grid-gap: 30px;
     .tool-box_item {
       position: relative;
       background-color: #fff;
       border-radius: 5%;
+      padding: 10px;
       overflow: hidden;
       background: $shadow9-background;
       box-shadow: $primary-shadow9;
       box-sizing: border-box;
       .img {
-        padding: 10px;
         width: 100%;
-        height: 120px;
-        object-fit: fill;
+        height: 100px;
         box-sizing: border-box;
       }
       .title {
-        padding: 5px;
+        line-height: 30px;
         text-align: center;
         font-weight: bold;
       }

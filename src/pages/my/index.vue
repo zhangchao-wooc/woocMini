@@ -8,7 +8,6 @@
     <view class="my-button">
       <nut-toast :msg="msg" v-model:visible="show" :type="type" />
       <nut-cell title="增量更新" @click="update" ></nut-cell>
-      <nut-cell title="prompt" @click="prompt" ></nut-cell>
       <nut-cell :title="t('language')" :desc="language" @click="switchActionSheet"></nut-cell>
     </view>
     

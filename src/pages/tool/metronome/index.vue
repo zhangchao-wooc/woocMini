@@ -3,13 +3,15 @@
   <view class="metronome">
     <view class="metronome-content">
       <div class="metronome-content-view">
-        <view v-for="item in meter" :key="item" class="meter-item">{{item}}</view>
+        <div class="view-box">
+          <view v-for="item in meter" :key="item" class="meter-item">{{item}}</view>
+        </div>
       </div>
       <div class="metronome-content-set">
         <!-- 速度 -->
-        <nut-button @click="set(1)">{{t('tool.metronome.speed')}} {{ speed}}</nut-button>
+        <view class="set-btn" @click="set(1)">{{t('tool.metronome.speed')}} {{ speed}}</view>
         <!-- 节拍 -->
-        <nut-button @click="set(2)">{{t('tool.metronome.meter')}} {{ meter}}</nut-button>
+        <view class="set-btn" @click="set(2)">{{t('tool.metronome.meter')}} {{ meter}}</view>
       </div>
     </view>
     <view class="metronome-btn">
@@ -26,20 +28,20 @@
       round
       @click-close-icon="close"
       @close="close"
-      :style="{ height: '30%' }"
+      :style="{ height: '40%' }"
       v-model:visible="isVisible"
     >
       <!-- 速度 -->
       <view v-if="mode === 1" class="select-speed">
         <view class="title">{{t('tool.metronome.selectSpeed')}}</view>
-        <nut-range v-model="speed" @change="onSpeedChange" ></nut-range>
+        <nut-range v-model="speed" @change="onSpeedChange" hidden-range :max="218" :min="40"></nut-range>
       </view>
       <!-- 节拍 -->
       <view v-else class="select-meter">
         <view class="title">{{t('tool.metronome.selectMeter')}}</view>
         <view class="meterList">
           <nut-tag 
-            mark 
+            round 
             type="primary" 
             @click="selectMeter(item)"  
             v-for="item in 12" 
@@ -66,7 +68,7 @@ export default {
       isPlay: false,
       isVisible: false,
       mode: 1, // 1、setSpeed 2、setMeter
-      speed: 60,
+      speed: 40,
       meter: 3,
     })
 
@@ -74,7 +76,7 @@ export default {
       const d = document.getElementsByClassName('icon')[0]
       const e = document.getElementsByClassName('metronome')[0]
 
-      e.style.animation = !state.isPlay ? 'pulse 3s linear infinite;' : ''
+      e.style.animation = !state.isPlay ? '_pulse 3s linear infinite;' : ''
       state.isPlay = !state.isPlay
       audio()
     }
@@ -127,38 +129,45 @@ export default {
     width: 100vw;
     height: 50vh;
     .metronome-content-view {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-flow: wrap;
-      height: calc(100% - 60px);
-      padding: 0 10px;
-      .meter-item {
-        display: grid;
-        place-items: center;
-        width: 50px;
-        height: 50px;
-        margin: 0 5px;
-        border-radius: 50%;
-        background-color: $shadow9-background;
-        box-shadow: inset 5px 5px 10px #d9d9d9,
-            inset -5px -5px 10px #ffffff;;
+      display: grid;
+      place-items: center;
+      height: calc(100% - 100px);
+      padding: 0 7px;
+      box-sizing: border-box;
+      .view-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        .meter-item {
+          display: grid;
+          place-items: center;
+          width: 50px;
+          height: 50px;
+          margin: 5px;
+          border-radius: 50%;
+          background-color: $shadow9-background;
+          box-shadow: inset 5px 5px 10px #d9d9d9,
+              inset -5px -5px 10px #ffffff;;
+        }
       }
     }
     .metronome-content-set {
       position: absolute;
       bottom: 0;
       width: 100%;
-      height: 60px;
+      height: 100px;
       display: flex;
       justify-content: space-evenly;
-      .nut-button {
+      .set-btn {
+        display: grid;
+        place-items: center;
         width: 150px;
-        height: 60px;
-        border: 0px;
+        height: 100px;
         border-radius: 20px;
-        background-color: #fff;
+        background-color: $shadow9-background;
         box-shadow: $primary-shadow9;
+        box-sizing: border-box;
       }
     }
   } 
@@ -181,30 +190,27 @@ export default {
     padding: 10px;
     .title {
       height: 60px;
-      line-height: 60px;
+      line-height: 40px;
       width: 100%;
       text-align: center;
       font-weight: bold;
     }
     .nut-range {
-      margin-top: 40px;
+      height: 30px;
+      border-radius: 10px;
+      margin: 40px 10px 0;
+      animation: _pulse 9s linear infinite;
     }
     .meterList {
       display: grid;
-      grid-template-columns: repeat(auto-fill, 60px);
-      grid-template-rows: 30px;
+      grid-template-columns: repeat(auto-fill, 20%);
+      justify-content: space-around;
       gap: 10px;
-    }
-  }
-  @keyframes pulse {
-    0% { 
-      filter: hue-rotate(0);
-    }
-    50% { 
-      filter: hue-rotate(90deg); 
-    }
-    100% {
-      filter: hue-rotate(0deg); 
+      .nut-tag {
+        height: 30px;
+        display: grid;
+        place-items: center;
+      }
     }
   }
 }

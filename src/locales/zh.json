@@ -1,10 +1,4 @@
 {
-  "back_to_home": "回到首页",
-  "error404": "找不到这个页面...",
-  "error500": "出错啦...",
-  "refresh": "刷新",
-  "title": "标题",
-  "page.localeProvider": "非tabbar页面",
   "home": "首页",
   "tool": "工具",
   "discover": "发现",
@@ -20,7 +14,8 @@
   "tool.metronome.speed": "速度",
   "tool.metronome.selectSpeed": "速度",
   "tool.metronome.meter": "节拍",
-  "tool.metronome.selectMeter": "节拍"
+  "tool.metronome.selectMeter": "节拍",
+  "tool.compass": "罗盘"
 
 
 }
