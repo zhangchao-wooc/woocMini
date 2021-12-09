@@ -74,9 +74,7 @@ export default {
 
     const play = (item) => {
       const d = document.getElementsByClassName('icon')[0]
-      const e = document.getElementsByClassName('metronome')[0]
-
-      e.style.animation = !state.isPlay ? '_pulse 3s linear infinite;' : ''
+      d.style.animation = !state.isPlay ? '_pulse 3s linear infinite;' : ''
       state.isPlay = !state.isPlay
       audio()
     }

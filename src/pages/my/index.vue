@@ -117,6 +117,11 @@ export default {
       if(res) {
         state.userInfo = res
         state.isLogin = true
+        Taro.getWeRunData({
+      success: (res) => {
+        console.log(res);
+      }
+    })
       }
       console.log('callback', state.userInfo);
       

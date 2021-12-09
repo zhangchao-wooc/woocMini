@@ -17,19 +17,16 @@ const config = {
   },
   sass: {
     resource: [
-        path.resolve(__dirname, '..', 'src/assets/styles/themes.scss')
+      path.resolve(__dirname, '..', 'src/assets/styles/themes.scss')
     ]
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
   plugins: ['@tarojs/plugin-html'],
-  defineConstants: {
-  },
+  defineConstants: {},
   copy: {
-    patterns: [
-    ],
-    options: {
-    }
+    patterns: [],
+    options: {}
   },
   framework: 'vue3',
   mini: {
@@ -37,7 +34,7 @@ const config = {
       pxtransform: {
         enable: true,
         config: {
-          selectorBlackList: ['body']
+          selectorBlackList: [/van-/]
         }
       },
       url: {
@@ -61,8 +58,7 @@ const config = {
     postcss: {
       autoprefixer: {
         enable: true,
-        config: {
-        }
+        config: {}
       },
       cssModules: {
         enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true

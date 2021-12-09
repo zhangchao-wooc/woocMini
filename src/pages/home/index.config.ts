@@ -1,4 +1,3 @@
 export default {
-  // enablePullDownRefresh: true,
-  navigationStyle: 'custom'
-}
+  navigationStyle: "custom"
+};

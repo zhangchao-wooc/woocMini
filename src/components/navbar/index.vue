@@ -75,7 +75,7 @@ export default {
   position: sticky;
   top: 0;
   z-index: 888;
-  animation: _pulse 20s linear infinite;
+  // animation: _pulse 20s linear infinite;
   .title {
     position: fixed;
     top: 0;
