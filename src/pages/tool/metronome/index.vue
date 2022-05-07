@@ -112,7 +112,7 @@ export default {
     }
     
     onMounted(() => {
-      Taro.setNavigationBarTitle({title: t('tool.metronome')})
+      Taro.setNavigationBarTitle({title: t('tool.metronome.desc')})
     })
       
     return {close, selectMeter, set, onSpeedChange, play, onMounted, ...toRefs(state)}

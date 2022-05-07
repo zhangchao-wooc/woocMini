@@ -26,11 +26,17 @@ import {
 } from "@nutui/nutui-taro";
 import "@nutui/nutui-taro/dist/styles/themes/default.scss";
 import "./app.scss";
+import Taro from '@tarojs/taro';
+import Behavior from './until/behavior.js'
+import zh from './locales/zh-up';
+import en from './locales/en.json';
+
 
 const App = createApp({
+  behaviors: [Behavior],
   data() {
     return {
-      lang: ""
+      lang: "123"
     };
   },
   onLaunch(options) {
@@ -43,10 +49,21 @@ const App = createApp({
       themeColor: "#ff6600",
       homePath: "/pages/home/index"
     });
+    
+    setTimeout(function(){
+      i18n.updateLocale({locales: {'zh-Hans': zh, en}})
+      // Taro.redirectTo({
+      //   url: '/pages/tool/metronome/index'
+      // })
+      Taro.startPullDownRefresh()
+    }, 3000)
+    
+    
   },
   onShow(options) {
-    console.log(t("home"));
-  }
+    console.log(this.lang, this.ty_lang);
+    
+  } 
   // 入口组件不需要实现 render 方法，即使实现了也会被 taro 所覆盖
 });
 

@@ -2,7 +2,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "editor.accessibilityPageSize": 100,
-  "editor.accessibilitySupport": "off",
   "editor.formatOnSave": true
 }

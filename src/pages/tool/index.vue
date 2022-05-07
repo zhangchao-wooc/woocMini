@@ -32,7 +32,7 @@ export default {
       tab4value: '0',
       dataList: [
         {
-          name: 'tool.metronome',
+          name: 'tool.metronome.desc',
           img: metronome,
           route: 'metronome/index',
         },

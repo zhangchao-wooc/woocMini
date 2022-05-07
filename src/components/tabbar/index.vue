@@ -29,12 +29,12 @@ export default {
       active: props.selected,
       tabbar: [
         {
-          text: 'home',
+          text: 'home.desc',
           icon: 'home',
           path: '/pages/home/index'
         },
         {
-          text: 'tool',
+          text: 'tool.desc',
           icon: 'category',
           path: '/pages/tool/index'
         },

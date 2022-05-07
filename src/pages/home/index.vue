@@ -64,7 +64,7 @@ export default {
     Navbar
   },
   onShow() {
-    Taro.setNavigationBarTitle({title: t('home')})
+    Taro.setNavigationBarTitle({title: t('home.desc')})
   },
   setup(props){
     const state = reactive({

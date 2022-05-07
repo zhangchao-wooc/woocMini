@@ -9,6 +9,8 @@
       <nut-toast :msg="msg" v-model:visible="show" :type="type" />
       <nut-cell title="增量更新" @click="update" ></nut-cell>
       <nut-cell :title="t('language')" :desc="language" @click="switchActionSheet"></nut-cell>
+      <nut-cell :title="切换" :desc="language" @click="change"></nut-cell>
+      <text>{{tt()}}</text>
     </view>
     
     <nut-actionsheet 
@@ -37,7 +39,7 @@ export default {
     login
   },
   onShow() {
-    Taro.setNavigationBarTitle({title: t('my')})
+    Taro.setNavigationBarTitle({title: t('my.desc')})
   },
   setup(){
     const state = reactive({
@@ -65,8 +67,10 @@ export default {
           nickName: '未登录'
         }
       },
-      isLogin: false
-    });
+      isLogin: false,
+      lang: 'en',
+      showLang: ''
+     });
 
     const switchActionSheet = () => {
       state.isVisible = !state.isVisible
@@ -88,6 +92,14 @@ export default {
 
     const prompt = () => {
       state.show = true
+    }
+
+    const change = () => {
+      state.lang = state.lang === 'en' ? 'zh' : 'en'
+    }
+
+    const tt = () => {
+      return state.lang === 'en' ? '英文' : '中文'
     }
 
     onBeforeMount(() => {
@@ -137,7 +149,9 @@ export default {
       switchActionSheet,
       chooseItem,
       catMyInfo,
-      loginCallback
+      loginCallback,
+      change,
+      tt
     }
   },
   created() {
@@ -147,7 +161,9 @@ export default {
   methods: {
     set() {
       const a = i18n.getLocales()
-      i18n.setLocales( a === 'en-US' ? 'zh-CN':  'en-US')
+      console.log('setLocales');
+      
+      i18n.setLocales( a === 'en-US' ? 'zh-CN':  'en-US', true)
       
     },
     // t(id) {

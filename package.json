@@ -42,7 +42,6 @@
     "@tarojs/runtime": "3.3.2",
     "@tarojs/taro": "3.3.2",
     "@wooc/brokenwheel": "0.0.2",
-    "@wooc/mini-i18n": "0.0.2",
     "koa": "^2.13.4",
     "vue": "3.2.19"
   },
